@@ -5,6 +5,17 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
+app.use(function (req, res, next) {
+  console.log("middleware 1");
+  next();
+},
+  function (req, res, next) {
+    console.log("middleware 2");
+    next();
+  });
+
+
+
 app.get('/', (req, res) => {
   res.json({ message: 'Hello from TypeScript Node.js backend!' });
 });
