@@ -4,7 +4,7 @@
 "description": "Minimal Node 22 + TypeScript backend scaffold (Express) with Docker",
 "main": "dist/index.js",
 "scripts": {
-"dev": "ts-node-dev --respawn --transpile-only src/backend/index.ts",
+"dev": "ts-node-dev --respawn --transpile-only src/index.ts",
 "build": "tsc",
 "start": "node dist/index.js",
 "lint": "echo \"Add linting if you want\"",

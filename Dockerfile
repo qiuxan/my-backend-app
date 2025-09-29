@@ -4,12 +4,12 @@ WORKDIR /usr/src/app
 
 
 # Copy package manifests and install deps
-COPY package*.json ./
+COPY backend/package*.json ./
 RUN npm ci
 
 
 # Copy source and build
-COPY . .
+COPY backend/ .
 RUN npm run build
 
 
