@@ -20,7 +20,12 @@ app.get('/', (req, res) => {
   res.json({ message: 'Hello from TypeScript Node.js backend!' });
 });
 
-app.get('/health', (req, res) => {
+app.get('/health', 
+  (req, res, next) => {
+    console.log("health check middleware");
+    next();
+  },
+  (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
