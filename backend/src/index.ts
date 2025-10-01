@@ -1,4 +1,5 @@
 import express from 'express';
+import { logRequestDetails } from './middleware';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ app.get('/health',
     console.log("health check middleware");
     next();
   },
+  logRequestDetails,
   (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
