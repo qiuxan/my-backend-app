@@ -9,4 +9,10 @@ userRouter.get('/register', (req, res) => {
   res.json({ message: 'User registration route' });
 });
 
+userRouter.get('/id/:userId', (req, res) => {
+  const { userId } = req.params;
+  console.log("testing: http://localhost:3000/users/id/456");
+  res.json({ message: `User profile route for user ID: ${userId}` });
+});
+
 export default userRouter;
