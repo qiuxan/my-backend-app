@@ -1,6 +1,7 @@
 import express from "express";
 import { logRequestDetails } from "./middleware";
 import userRouter from "./routes/users";
+import path from "path";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,6 +10,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded());
 // to parse incoming requests with json payloads
 app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(
   function (req, res, next) {
@@ -42,3 +45,4 @@ app.use("/users", userRouter);
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
+
