@@ -5,6 +5,9 @@ import userRouter from "./routes/users";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// to parse incoming requests with urlencoded payloads
+app.use(express.urlencoded());
+// to parse incoming requests with json payloads
 app.use(express.json());
 
 app.use(
