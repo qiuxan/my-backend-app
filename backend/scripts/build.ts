@@ -8,14 +8,22 @@ import childProcess from 'child_process';
  */
 (async () => {
   try {
+    const skipLint = process.argv.includes('--skip-lint');
+    
     // Remove current build
     await remove('./dist/');
-    await exec('npm run lint', './');
+    
+    // Run lint only if not skipping
+    if (!skipLint) {
+      await exec('npm run lint', './');
+    }
+    
     await exec('tsc --build tsconfig.prod.json', './');
     // Copy
     await copy('./src/public', './dist/public');
     await copy('./src/views', './dist/views');
     await copy('./src/repos/database.json', './dist/repos/database.json');
+    await copy('./config', './dist/config');
     await copy('./temp/config.js', './config.js');
     await copy('./temp/src', './dist');
     await remove('./temp/');
