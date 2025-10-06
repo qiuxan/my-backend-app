@@ -58,9 +58,10 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
 
 // **** FrontEnd Content **** //
 
-// Set views directory (html)
+// Set views directory and configure EJS
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
+app.set('view engine', 'ejs');
 
 // Set static directory (js and css).
 const staticDir = path.join(__dirname, 'public');
@@ -71,9 +72,30 @@ app.get('/', (_: Request, res: Response) => {
   return res.redirect('/users');
 });
 
-// Redirect to login if not logged in.
-app.get('/users', (_: Request, res: Response) => {
-  return res.sendFile('users.html', { root: viewsDir });
+// Render users page with EJS
+app.get('/users', async (_: Request, res: Response) => {
+  try {
+    // Import UserService dynamically to avoid circular dependencies
+    const UserService = await import('@src/services/UserService');
+    const users = await UserService.default.getAll();
+    
+    // Format the created date for display
+    const formattedUsers = users.map(user => ({
+      ...user,
+      createdFormatted: new Date(user.created).toLocaleString()
+    }));
+    
+    return res.render('users', { 
+      title: 'Users Management', 
+      users: formattedUsers 
+    });
+  } catch (error) {
+    logger.err('Error fetching users:', error);
+    return res.render('users', { 
+      title: 'Users Management', 
+      users: [] 
+    });
+  }
 });
 
 
