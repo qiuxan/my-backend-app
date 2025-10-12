@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
 import Paths from '@src/common/constants/Paths';
-import UserRoutes from './UserRoutes';
-import ArticalsRoutes from './ArticalsRoutes';
+import UserRoutes from './routes/UserRoutes';
+import ArticalsRoutes from './routes/ArticalsRoutes';
 
 
 /******************************************************************************
