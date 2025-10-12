@@ -36,6 +36,7 @@ async function getAll(_: IReq, res: IRes) {
  * Add one user.
  */
 async function add(req: IReq, res: IRes) {
+  console.log({ body: req.body });
   const { user } = Validators.add(req.body);
   await UserService.addOne(user);
   res.status(HttpStatusCodes.CREATED).end();
