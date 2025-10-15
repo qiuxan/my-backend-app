@@ -3,6 +3,7 @@ import { Router } from 'express';
 import Paths from '@src/common/constants/Paths';
 import UserRoutes from './routes/UserRoutes';
 import ArticalsRoutes from './routes/ArticalsRoutes';
+import { a } from 'vitest/dist/chunks/suite.d.FvehnV49';
 
 
 /******************************************************************************
@@ -34,6 +35,7 @@ const articalsRouter = Router();
 
 // Get all articles
 articalsRouter.get(Paths.Articles.Get, ArticalsRoutes.getAll);
+articalsRouter.post('/add', ArticalsRoutes.add);
 
 // Add ArticalsRouter
 apiRouter.use(Paths.Articles.Base, articalsRouter);

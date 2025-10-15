@@ -6,6 +6,14 @@ async function getAll(_:IReq, res: IRes) {
   res.status(HttpStatusCodes.OK).json({ articles });
 }
 
+async function add(req: IReq, res: IRes) {
+
+  console.log({ body: req.body });
+  // Implementation for adding an article
+  res.status(HttpStatusCodes.CREATED).json({  message: "Article added successfully" });
+}
+
 export default {
-  getAll
+  getAll,
+  add
 } as const;
