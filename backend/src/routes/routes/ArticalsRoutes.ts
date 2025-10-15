@@ -13,7 +13,18 @@ async function add(req: IReq, res: IRes) {
   res.status(HttpStatusCodes.CREATED).json({  message: "Article added successfully" });
 }
 
+
+// get one article by id
+async function getOne(req: IReq, res: IRes) {
+  const { id } = req.params;
+  // Implementation for getting an article by id
+  res.status(HttpStatusCodes.OK).json({ article: { id, title: "Sample Article", content: "This is a sample article." } });
+}
+
+
+
 export default {
   getAll,
-  add
+  add,
+  getOne
 } as const;
