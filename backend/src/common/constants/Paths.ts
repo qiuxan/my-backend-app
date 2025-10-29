@@ -15,4 +15,8 @@ export default {
     GetByUserId: '/user/:userId',
     GetById: '/:id',
   },
+  Uploads: {
+    Base: '/upload',
+    File: '/file',
+  },
 } as const;

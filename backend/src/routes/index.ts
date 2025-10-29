@@ -3,6 +3,7 @@ import { Router } from 'express';
 import Paths from '@src/common/constants/Paths';
 import UserRoutes from './routes/UserRoutes';
 import ArticalsRoutes from './routes/ArticalsRoutes';
+import UploadRoutes from './routes/UploadRoutes';
 
 
 /******************************************************************************
@@ -26,6 +27,13 @@ userRouter.delete(Paths.Users.Delete, UserRoutes.delete);
 // Add UserRouter
 apiRouter.use(Paths.Users.Base, userRouter);
 
+// ** Add UploadRouter ** //
+// Init router
+const uploadRouter = Router();
+
+uploadRouter.post(Paths.Uploads.File, UploadRoutes.uploadWithStorageMiddleware, UploadRoutes.uploadFile);
+// Add UploadRouter
+apiRouter.use(Paths.Uploads.Base, uploadRouter);
 
 // ** Add ArticalsRouter ** //
 
