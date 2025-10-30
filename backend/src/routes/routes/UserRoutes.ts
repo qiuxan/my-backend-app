@@ -1,5 +1,6 @@
 import { isNumber } from 'jet-validators';
 import { transform } from 'jet-validators/utils';
+import jwt from 'jsonwebtoken';
 
 import HttpStatusCodes from '@src/common/constants/HttpStatusCodes';
 import UserService from '@src/services/UserService';
@@ -60,6 +61,25 @@ async function delete_(req: IReq, res: IRes) {
   res.status(HttpStatusCodes.OK).end();
 }
 
+/*log in*/
+async function login(req: IReq, res: IRes) {
+  if(req.query.username === "admin" || req.query.password === "000") {
+    const token = jwt.sign({ username: req.query.username }, 'secret-key', { expiresIn: '1d', algorithm: 'HS256' });
+    res.status(HttpStatusCodes.OK).json({
+      code: 1,
+      message: "Login successful",
+      data: {
+        token 
+      }
+    });
+ 
+  }else {
+    res.status(HttpStatusCodes.UNAUTHORIZED).json({
+      code: -1,
+      message: "Invalid username or password"
+    });
+  }
+}
 
 /******************************************************************************
                                 Export default
@@ -70,4 +90,5 @@ export default {
   add,
   update,
   delete: delete_,
+  login,
 } as const;

@@ -7,6 +7,7 @@ export default {
     Add: '/add',
     Update: '/update',
     Delete: '/delete/:id',
+    Login: '/login',
   },
   Articles: {
     Base: '/articles',

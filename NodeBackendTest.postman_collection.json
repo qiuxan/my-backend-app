@@ -7,36 +7,165 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:3000/users/login",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"id\":\"ddd\",\n    \"name\":\"bbb\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Article",
+			"item": [
+				{
+					"name": "GetAllArticles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":\"ddd\",\n    \"name\":\"bbb\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/articles/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"articles",
+								"all"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/users/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"users",
-						"login"
-					]
+				{
+					"name": "AddArticle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\":\"hi\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/articles/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"articles",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetArticleByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_article_url}}/1",
+							"host": [
+								"{{base_article_url}}"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "Upload",
+			"item": [
+				{
+					"name": "update Image",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "img",
+									"type": "file",
+									"src": "/Users/xianqiu/Desktop/cat.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_uploadurl}}",
+							"host": [
+								"{{base_uploadurl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/uploads//images/img-1761731504378-733637153.png",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"uploads",
+								"",
+								"images",
+								"img-1761731504378-733637153.png"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
