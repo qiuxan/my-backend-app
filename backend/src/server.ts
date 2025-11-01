@@ -3,6 +3,7 @@ import path from 'path';
 import helmet from 'helmet';
 import express, { Request, Response, NextFunction } from 'express';
 import logger from 'jet-logger';
+import { expressjwt } from 'express-jwt'; // <-- Add this import
 
 import BaseRouter from '@src/routes';
 
@@ -39,6 +40,37 @@ if (ENV.NodeEnv === NodeEnvs.Production) {
   }
 }
 
+// Set static directory (js and css).
+const staticDir = path.join(__dirname, 'public');
+app.use(express.static(staticDir));
+
+// Add express-jwt middleware for API protection
+app.use(
+  expressjwt({
+    secret: 'secret-key', // Use your JWT secret from ENV
+    algorithms: ['HS256'],
+    credentialsRequired: true,
+  }).unless({ 
+    path: [
+      /^\/stylesheets\/.*/, // Allow all stylesheets
+      /^\/public\/.*/,      // Allow all public assets
+      '/',                  // <-- Allow root path without auth
+      '/users', 
+      '/api/users', 
+      '/api/users/all',     // <-- Make /api/users/all public
+      { url: /^\/api\/articles\/\w+/, methods: ['GET'] }, // <-- Only allow GET
+    ]
+  })
+);
+
+// Handle 401 Unauthorized errors from express-jwt
+app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
+  if (err.name === 'UnauthorizedError') {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+  next(err);
+});
+
 // Add APIs, must be after middleware
 app.use(Paths.Base, BaseRouter);
 
@@ -62,10 +94,6 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
 const viewsDir = path.join(__dirname, 'views');
 app.set('views', viewsDir);
 app.set('view engine', 'ejs');
-
-// Set static directory (js and css).
-const staticDir = path.join(__dirname, 'public');
-app.use(express.static(staticDir));
 
 // Nav to users pg by default
 app.get('/', (_: Request, res: Response) => {

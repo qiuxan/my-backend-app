@@ -45,7 +45,10 @@ const articalsRouter = Router();
 articalsRouter.get(Paths.Articles.Get, ArticalsRoutes.getAll);
 articalsRouter.post(Paths.Articles.Add, ArticalsRoutes.add);
 articalsRouter.get(Paths.Articles.GetByUserId, ArticalsRoutes.getByUserId);
+
 articalsRouter.get(Paths.Articles.GetById, ArticalsRoutes.getOne);
+// Mockup DELETE article by id
+articalsRouter.delete(Paths.Articles.DeleteById, ArticalsRoutes.deleteOne);
 
 // Add ArticalsRouter
 apiRouter.use(Paths.Articles.Base, articalsRouter);

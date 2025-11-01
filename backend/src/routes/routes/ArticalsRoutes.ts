@@ -118,4 +118,11 @@ export default {
   add,
   getOne,
   getByUserId
+  ,deleteOne // mockup DELETE API
 } as const;
+// Mockup DELETE API for deleting an article by id
+async function deleteOne(req: IReq, res: IRes) {
+  const { id } = req.params;
+  // No real deletion logic, just return success
+  res.status(HttpStatusCodes.OK).json({ message: `Mock delete successful for article id ${id}` });
+}

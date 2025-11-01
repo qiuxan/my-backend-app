@@ -15,6 +15,7 @@ export default {
     Add: '/add',
     GetByUserId: '/user/:userId',
     GetById: '/:id',
+    DeleteById: '/delete/:id',
   },
   Uploads: {
     Base: '/upload',
