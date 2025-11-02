@@ -58,6 +58,7 @@ app.use(
       '/users', 
       '/api/users', 
       '/api/users/all',     // <-- Make /api/users/all public
+      '/api/users/login',   // <-- Make /api/users/login public
       { url: /^\/api\/articles\/\w+/, methods: ['GET'] }, // <-- Only allow GET
     ]
   })
