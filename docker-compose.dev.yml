@@ -14,6 +14,7 @@ services:
 
   app:
     image: node:22
+    container_name: my-backend-app
     working_dir: /usr/src/app
     volumes:
       - ./backend:/usr/src/app:cached
@@ -27,6 +28,26 @@ services:
     command: /bin/sh -c "npm install --no-audit --no-fund && npm run dev:hot"
     depends_on:
       - mongodb
+    networks:
+      - backend-network
+
+  frontend:
+    image: node:22
+    container_name: my-frontend-app
+    working_dir: /usr/src/app
+    volumes:
+      - ./frontend:/usr/src/app:cached
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    ports:
+      - "3001:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - NEXT_PUBLIC_API_URL=http://app:3000
+    command: /bin/sh -c "npm install --no-audit --no-fund && npm run dev"
+    depends_on:
+      - app
     networks:
       - backend-network
 
